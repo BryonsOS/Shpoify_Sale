@@ -1,0 +1,18 @@
+{
+  "name": "Sick Sales",
+  "short_name": "Sick Sales",
+  "description": "Daily online and merch trailer sales reports for Sick The Magazine.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0f0f10",
+  "theme_color": "#0f0f10",
+  "icons": [
+    {
+      "src": "https://cdn.shopify.com/s/files/1/0640/8981/7310/files/STM_Logo_Sick_The_Mag_Square_Color_RGB_72dpi_v01.png?v=1784655999",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

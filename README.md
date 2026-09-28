@@ -5,13 +5,14 @@ Shopify (online) and merch trailer (POS) sales emails.
 
 ## What it does
 
-| Tab | Replaces | What it does |
-|---|---|---|
-| **Report** | `ONLINE_REPORT_LOG`, `POS_TRAILER`, both BOSS_VIEW sheets, the email macro | Enter one day or a Fri–Sun weekend. **Pull from Shopify** fills the online numbers from the dashboard's nightly pull. Other is worked out for you and flagged if negative. The email preview updates live; **Save & email** opens it in your mail app with To/CC/subject filled in. |
-| **Log** | the log sheets | Every report, newest first, with OK / Check / Emailed badges. Tap one to edit or delete it. |
-| **Totals** | `ONLINE_WEEKLY_CONTROL` / `ONLINE_WEEKLY_SUMMARY` | Any date range (this week, last month, year to date…) for either channel, with a summary email. Warns when days in the range have no report. |
-| **Events** | `Event Archive` | Name an event and its dates; trailer and online totals are calculated from the reports, nothing to copy by hand. |
-| **Settings** | cells B3/B4 | Recipients, subject line, category names and order, PIN. |
+| Screen | What it's for |
+|---|---|
+| **Today** | Opens here. The morning online report with its change vs last week and the 4-week average, **Review & send** / **Send as is**, reports not emailed yet, the live or upcoming event, headline tiles and a 12-week chart. |
+| **Report** | Enter or edit one day or a Fri–Sun weekend. **Pull from Shopify**, Other worked out for you, a live "vs last week" line, and an email preview with **Open in email**, **Copy for Gmail** (keeps a table layout) and an optional "vs last week" note. During an event, trailer days show the matching day from last year's event next to each category. |
+| **Log** | Every report, filterable by channel, month, "Not emailed" and "Needs check", with a CSV download. |
+| **Totals** | Any date range: tiles (vs the previous period and the same dates last year), a stacked chart by report or by week, category mix, breakdown table and a summary email. |
+| **Events** | Event list, plus **event mode**: a day-by-day strip to enter trailer days, totals vs a comparison event (same name with a different year is picked automatically), a category comparison chart and an event summary email. |
+| **Settings** | Channel names, recipients, subject line, categories, PIN, and how to add the app to your phone's home screen. |
 
 ## How it's built
 

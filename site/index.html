@@ -4,19 +4,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#111214">
+  <meta name="theme-color" content="#0f0f10">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Sick Sales">
   <title>Sick Sales</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23e5202e'/%3E%3Cpath d='M9 21l5-6 4 3 5-7' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="https://cdn.shopify.com/s/files/1/0640/8981/7310/files/STM_Logo_Sick_The_Mag_Square_Color_RGB_72dpi_v01.png?v=1784655999">
+  <link rel="apple-touch-icon" href="https://cdn.shopify.com/s/files/1/0640/8981/7310/files/STM_Logo_Sick_The_Mag_Square_Color_RGB_72dpi_v01.png?v=1784655999">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <!-- Login -->
   <main id="login" class="login" hidden>
     <form id="login-form" class="login-card" autocomplete="off">
-      <div class="brand brand-lg"><span class="brand-mark">SICK</span> Sales</div>
+      <img class="login-logo" src="https://cdn.shopify.com/s/files/1/0640/8981/7310/files/STM_Logo_Sick_The_Mag_Square_Color_RGB_72dpi_v01.png?v=1784655999" alt="Sick The Magazine">
+      <h1>Sales</h1>
       <p class="muted">Daily online and merch trailer reports.</p>
       <label class="field">
         <span>PIN</span>
@@ -31,18 +37,52 @@
   <!-- App -->
   <div id="app" hidden>
     <header class="topbar">
-      <div class="brand"><span class="brand-mark">SICK</span> Sales</div>
-      <nav class="tabs" role="tablist">
-        <button class="tab" data-tab="report" role="tab">Report</button>
-        <button class="tab" data-tab="log" role="tab">Log</button>
-        <button class="tab" data-tab="totals" role="tab">Totals</button>
-        <button class="tab" data-tab="events" role="tab">Events</button>
-        <button class="tab" data-tab="settings" role="tab">Settings</button>
+      <a class="brand" href="#" data-go="today" aria-label="Sick Sales home">
+        <img class="brand-logo" src="https://cdn.shopify.com/s/files/1/0640/8981/7310/files/STM_Logo_Sick_The_Mag_Square_Color_RGB_72dpi_v01.png?v=1784655999" alt="">
+        <span>Sales</span>
+      </a>
+      <nav class="tabs" aria-label="Sections">
+        <button class="tab" data-tab="today">Today</button>
+        <button class="tab" data-tab="report">Report</button>
+        <button class="tab" data-tab="log">Log</button>
+        <button class="tab" data-tab="totals">Totals</button>
+        <button class="tab" data-tab="events">Events</button>
+        <button class="tab" data-tab="settings">Settings</button>
       </nav>
+      <button class="icon-btn only-mobile" data-tab="settings" aria-label="Settings">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></svg>
+      </button>
     </header>
 
-    <!-- Report: enter / edit one day or weekend -->
-    <section class="view" data-view="report">
+    <!-- Today -->
+    <section class="view" data-view="today">
+      <div class="view-head">
+        <div>
+          <p class="eyebrow" id="today-date"></p>
+          <h1 id="today-greeting">Good morning</h1>
+        </div>
+      </div>
+      <div class="today-grid">
+        <div class="stack">
+          <div id="today-report" class="card hero-card"></div>
+          <div id="today-event"></div>
+          <div id="today-unsent"></div>
+        </div>
+        <div class="stack">
+          <div id="today-tiles" class="tiles"></div>
+          <div class="card">
+            <div class="card-head">
+              <h2>Online sales by week</h2>
+              <span class="muted small">Last 12 weeks</span>
+            </div>
+            <div id="today-chart" class="chart"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Report -->
+    <section class="view" data-view="report" hidden>
       <div class="view-head">
         <h1 id="report-title">New report</h1>
         <div class="seg" id="report-channel">
@@ -50,6 +90,8 @@
           <button data-channel="trailer">Trailer</button>
         </div>
       </div>
+
+      <div id="report-event" class="event-strip" hidden></div>
 
       <div class="grid-2">
         <form id="report-form" class="card" autocomplete="off" novalidate>
@@ -66,14 +108,15 @@
           </div>
 
           <div id="shopify-box" class="pull">
-            <button type="button" id="btn-pull" class="btn">Pull from Shopify</button>
+            <button type="button" id="btn-pull" class="btn btn-sm">Pull from Shopify</button>
             <span id="pull-msg" class="muted small"></span>
           </div>
 
           <div class="row">
-            <label class="field"><span id="l-visits">Visits</span><input id="f-visits" type="text" inputmode="numeric"></label>
-            <label class="field field-strong"><span>Total ($)</span><input id="f-total" type="text" inputmode="decimal" required></label>
+            <label class="field"><span id="l-visits">Visits</span><input id="f-visits" class="num" type="text" inputmode="numeric"></label>
+            <label class="field field-strong"><span>Total ($)</span><input id="f-total" class="num" type="text" inputmode="decimal" required></label>
           </div>
+          <p id="f-compare" class="compare-line" hidden></p>
 
           <div id="f-cats" class="cats"></div>
 
@@ -83,24 +126,30 @@
           </div>
           <p id="other-warn" class="warn" hidden>Categories add up to more than the total. Check the numbers.</p>
 
-          <div id="ftc-row" class="row">
-            <label class="field"><span>First-time customers</span><input id="f-ftc" class="num" type="text" inputmode="numeric"></label>
-            <label class="field"><span>First-time spend ($)</span><input id="f-fts" class="num" type="text" inputmode="decimal"></label>
-          </div>
+          <details id="ftc-box" class="more">
+            <summary>First-time customers</summary>
+            <div class="row">
+              <label class="field"><span>Customers</span><input id="f-ftc" class="num" type="text" inputmode="numeric"></label>
+              <label class="field"><span>Spend ($)</span><input id="f-fts" class="num" type="text" inputmode="decimal"></label>
+            </div>
+          </details>
 
           <label class="field"><span>Notes</span><input id="f-notes" type="text" maxlength="300"></label>
 
-          <div class="actions">
+          <div class="actions sticky-actions">
             <button type="submit" class="btn btn-primary">Save</button>
             <button type="button" id="btn-save-email" class="btn">Save &amp; email</button>
             <button type="button" id="btn-new" class="btn btn-ghost">Clear</button>
-            <button type="button" id="btn-delete" class="btn btn-danger" hidden>Delete</button>
           </div>
           <p id="report-msg" class="msg" role="status"></p>
+          <div class="actions"><button type="button" id="btn-delete" class="btn btn-danger btn-sm" hidden>Delete this report</button></div>
         </form>
 
         <aside class="card email-card">
-          <h2>Email preview</h2>
+          <div class="card-head">
+            <h2>Email preview</h2>
+            <label class="check small"><input type="checkbox" class="email-compare"> Add vs last week</label>
+          </div>
           <dl class="email-meta">
             <dt>To</dt><dd id="e-to"></dd>
             <dt>CC</dt><dd id="e-cc"></dd>
@@ -108,8 +157,9 @@
           </dl>
           <pre id="e-body" class="email-body"></pre>
           <div class="actions">
-            <button type="button" id="btn-copy" class="btn">Copy text</button>
-            <button type="button" id="btn-mail" class="btn">Open in email</button>
+            <button type="button" id="btn-mail" class="btn btn-primary">Open in email</button>
+            <button type="button" id="btn-copy-rich" class="btn">Copy for Gmail</button>
+            <button type="button" id="btn-copy" class="btn btn-ghost">Copy text</button>
           </div>
           <p id="sent-note" class="muted small"></p>
         </aside>
@@ -120,11 +170,20 @@
     <section class="view" data-view="log" hidden>
       <div class="view-head">
         <h1>Report log</h1>
+        <button type="button" id="log-csv" class="btn btn-sm">Download CSV</button>
+      </div>
+      <div class="filters">
         <div class="seg" id="log-channel">
           <button data-channel="all">All</button>
           <button data-channel="online">Online</button>
           <button data-channel="trailer">Trailer</button>
         </div>
+        <div class="seg" id="log-status">
+          <button data-channel="all">Any status</button>
+          <button data-channel="unsent">Not emailed</button>
+          <button data-channel="check">Needs check</button>
+        </div>
+        <select id="log-month" aria-label="Month"></select>
       </div>
       <div class="card flush">
         <div class="table-wrap">
@@ -134,7 +193,7 @@
           </table>
         </div>
       </div>
-      <p class="muted small">Tap a row to open it. Imported rows show where they came from (Excel or the nightly Shopify pull).</p>
+      <p id="log-foot" class="muted small"></p>
     </section>
 
     <!-- Totals -->
@@ -146,45 +205,64 @@
           <button data-channel="trailer">Trailer</button>
         </div>
       </div>
-      <div class="grid-2">
-        <div class="card">
-          <div class="chips">
-            <button type="button" class="chip" data-range="this-week">This week</button>
-            <button type="button" class="chip" data-range="last-week">Last week</button>
-            <button type="button" class="chip" data-range="this-month">This month</button>
-            <button type="button" class="chip" data-range="last-month">Last month</button>
-            <button type="button" class="chip" data-range="ytd">Year to date</button>
-          </div>
-          <div class="row">
-            <label class="field"><span>From</span><input id="t-from" type="date"></label>
-            <label class="field"><span>To</span><input id="t-to" type="date"></label>
-          </div>
-          <table class="table compact" id="t-table"></table>
-          <p id="t-note" class="muted small"></p>
+      <div class="filters">
+        <div class="chips flat">
+          <button type="button" class="chip" data-range="this-week">This week</button>
+          <button type="button" class="chip" data-range="last-week">Last week</button>
+          <button type="button" class="chip" data-range="this-month">This month</button>
+          <button type="button" class="chip" data-range="last-month">Last month</button>
+          <button type="button" class="chip" data-range="last-90">Last 90 days</button>
+          <button type="button" class="chip" data-range="ytd">Year to date</button>
         </div>
-        <aside class="card email-card">
-          <h2>Summary email</h2>
-          <dl class="email-meta">
-            <dt>To</dt><dd id="te-to"></dd>
-            <dt>CC</dt><dd id="te-cc"></dd>
-            <dt>Subject</dt><dd id="te-subject"></dd>
-          </dl>
-          <pre id="te-body" class="email-body"></pre>
-          <div class="actions">
-            <button type="button" id="t-copy" class="btn">Copy text</button>
-            <button type="button" id="t-mail" class="btn">Open in email</button>
+        <div class="range">
+          <input id="t-from" type="date" aria-label="From">
+          <span class="muted">to</span>
+          <input id="t-to" type="date" aria-label="To">
+        </div>
+      </div>
+      <div id="t-tiles" class="tiles"></div>
+      <div class="grid-2">
+        <div class="stack">
+          <div class="card">
+            <div class="card-head"><h2 id="t-chart-title">Sales by day</h2></div>
+            <div id="t-chart" class="chart"></div>
           </div>
-        </aside>
+          <div class="card">
+            <div class="card-head"><h2>Category mix</h2><span class="muted small">Share of total</span></div>
+            <div id="t-mix"></div>
+          </div>
+        </div>
+        <div class="stack">
+          <div class="card">
+            <div class="card-head"><h2>Breakdown</h2></div>
+            <table class="table compact" id="t-table"></table>
+            <p id="t-note" class="muted small"></p>
+          </div>
+          <aside class="card email-card">
+            <div class="card-head">
+              <h2>Summary email</h2>
+            </div>
+            <dl class="email-meta">
+              <dt>To</dt><dd id="te-to"></dd>
+              <dt>CC</dt><dd id="te-cc"></dd>
+              <dt>Subject</dt><dd id="te-subject"></dd>
+            </dl>
+            <pre id="te-body" class="email-body"></pre>
+            <div class="actions">
+              <button type="button" id="t-mail" class="btn btn-primary">Open in email</button>
+              <button type="button" id="t-copy-rich" class="btn">Copy for Gmail</button>
+              <button type="button" id="t-copy" class="btn btn-ghost">Copy text</button>
+            </div>
+          </aside>
+        </div>
       </div>
     </section>
 
-    <!-- Events -->
+    <!-- Events list -->
     <section class="view" data-view="events" hidden>
       <div class="view-head"><h1>Events</h1></div>
       <div class="grid-2">
-        <div>
-          <div id="events-list" class="stack"></div>
-        </div>
+        <div id="events-list" class="stack"></div>
         <form id="event-form" class="card" autocomplete="off">
           <h2 id="event-form-title">Add event</h2>
           <label class="field"><span>Name</span><input id="ev-name" type="text" required maxlength="120" placeholder="Sick Week 2027"></label>
@@ -199,8 +277,49 @@
             <button type="button" id="ev-delete" class="btn btn-danger" hidden>Delete</button>
           </div>
           <p id="event-msg" class="msg" role="status"></p>
-          <p class="muted small">Event totals add up every report that ends inside the event dates, so nothing needs archiving by hand.</p>
+          <p class="muted small">Totals add up every report that ends inside the event dates. Name next year's event the same way (for example "Sick Week 2027") and it's compared with this year's automatically.</p>
         </form>
+      </div>
+    </section>
+
+    <!-- Event mode -->
+    <section class="view" data-view="event" hidden>
+      <div class="view-head">
+        <div>
+          <p class="eyebrow"><a href="#" data-go="events">← Events</a></p>
+          <h1 id="ev-title"></h1>
+          <p id="ev-sub" class="muted"></p>
+        </div>
+        <label class="compare-pick">
+          <span class="muted small">Compare with</span>
+          <select id="ev-compare"></select>
+        </label>
+      </div>
+      <div id="ev-tiles" class="tiles"></div>
+      <div class="card">
+        <div class="card-head"><h2>Trailer days</h2><span class="muted small">Tap a day to enter or edit it</span></div>
+        <div id="ev-days" class="days"></div>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-head"><h2>Trailer by category</h2></div>
+          <div id="ev-chart" class="chart"></div>
+          <table class="table compact" id="ev-table"></table>
+        </div>
+        <aside class="card email-card">
+          <div class="card-head"><h2>Event summary email</h2></div>
+          <dl class="email-meta">
+            <dt>To</dt><dd id="ee-to"></dd>
+            <dt>CC</dt><dd id="ee-cc"></dd>
+            <dt>Subject</dt><dd id="ee-subject"></dd>
+          </dl>
+          <pre id="ee-body" class="email-body"></pre>
+          <div class="actions">
+            <button type="button" id="ee-mail" class="btn btn-primary">Open in email</button>
+            <button type="button" id="ee-copy-rich" class="btn">Copy for Gmail</button>
+            <button type="button" id="ee-copy" class="btn btn-ghost">Copy text</button>
+          </div>
+        </aside>
       </div>
     </section>
 
@@ -213,6 +332,7 @@
             <button type="button" data-channel="online">Online</button>
             <button type="button" data-channel="trailer">Trailer</button>
           </div>
+          <label class="field"><span>Channel name</span><input id="s-label" type="text"></label>
           <label class="field"><span>To</span><input id="s-to" type="text"></label>
           <label class="field"><span>CC</span><input id="s-cc" type="text"></label>
           <label class="field"><span>Subject starts with</span><input id="s-subject" type="text"></label>
@@ -237,6 +357,10 @@
             <p id="pin-msg" class="msg" role="status"></p>
           </form>
           <div class="card">
+            <h2>Put it on your phone</h2>
+            <p class="muted small">iPhone: open this page in Safari, tap Share, then <strong>Add to Home Screen</strong>. Android: Chrome menu, then <strong>Install app</strong> (or Add to Home screen).</p>
+          </div>
+          <div class="card">
             <h2>This device</h2>
             <p class="muted small">Signing out forgets the PIN on this device.</p>
             <button type="button" id="btn-logout" class="btn btn-ghost">Sign out</button>
@@ -244,8 +368,18 @@
         </div>
       </div>
     </section>
+
+    <!-- Phone navigation -->
+    <nav class="bottom-nav" aria-label="Sections">
+      <button class="bn" data-tab="today"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/></svg><span>Today</span></button>
+      <button class="bn" data-tab="report"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Report</span></button>
+      <button class="bn" data-tab="log"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg><span>Log</span></button>
+      <button class="bn" data-tab="totals"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V11M12 20V5M19 20v-7"/></svg><span>Totals</span></button>
+      <button class="bn" data-tab="events"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg><span>Events</span></button>
+    </nav>
   </div>
 
+  <div id="tooltip" class="tooltip" role="status" hidden></div>
   <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 
   <script src="config.js"></script>
