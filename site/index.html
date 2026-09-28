@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#111214">
+  <title>Sick Sales</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23e5202e'/%3E%3Cpath d='M9 21l5-6 4 3 5-7' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Login -->
+  <main id="login" class="login" hidden>
+    <form id="login-form" class="login-card" autocomplete="off">
+      <div class="brand brand-lg"><span class="brand-mark">SICK</span> Sales</div>
+      <p class="muted">Daily online and merch trailer reports.</p>
+      <label class="field">
+        <span>PIN</span>
+        <input id="login-pin" type="password" inputmode="numeric" autocomplete="current-password" required>
+      </label>
+      <label class="check"><input id="login-remember" type="checkbox" checked> Remember on this device</label>
+      <button class="btn btn-primary btn-block" type="submit">Unlock</button>
+      <p id="login-msg" class="msg" role="alert"></p>
+    </form>
+  </main>
+
+  <!-- App -->
+  <div id="app" hidden>
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">SICK</span> Sales</div>
+      <nav class="tabs" role="tablist">
+        <button class="tab" data-tab="report" role="tab">Report</button>
+        <button class="tab" data-tab="log" role="tab">Log</button>
+        <button class="tab" data-tab="totals" role="tab">Totals</button>
+        <button class="tab" data-tab="events" role="tab">Events</button>
+        <button class="tab" data-tab="settings" role="tab">Settings</button>
+      </nav>
+    </header>
+
+    <!-- Report: enter / edit one day or weekend -->
+    <section class="view" data-view="report">
+      <div class="view-head">
+        <h1 id="report-title">New report</h1>
+        <div class="seg" id="report-channel">
+          <button data-channel="online">Online</button>
+          <button data-channel="trailer">Trailer</button>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <form id="report-form" class="card" autocomplete="off" novalidate>
+          <div id="report-banner" class="banner" hidden></div>
+
+          <div class="row">
+            <label class="field"><span>Start date</span><input id="f-start" type="date" required></label>
+            <label class="field"><span>End date <em>(blank = one day)</em></span><input id="f-end" type="date"></label>
+          </div>
+          <div class="chips">
+            <button type="button" class="chip" data-quick="yesterday">Yesterday</button>
+            <button type="button" class="chip" data-quick="weekend">Last Fri–Sun</button>
+            <button type="button" class="chip" data-quick="today">Today</button>
+          </div>
+
+          <div id="shopify-box" class="pull">
+            <button type="button" id="btn-pull" class="btn">Pull from Shopify</button>
+            <span id="pull-msg" class="muted small"></span>
+          </div>
+
+          <div class="row">
+            <label class="field"><span id="l-visits">Visits</span><input id="f-visits" type="text" inputmode="numeric"></label>
+            <label class="field field-strong"><span>Total ($)</span><input id="f-total" type="text" inputmode="decimal" required></label>
+          </div>
+
+          <div id="f-cats" class="cats"></div>
+
+          <div class="other-line">
+            <span>Other (auto)</span>
+            <strong id="f-other">$0.00</strong>
+          </div>
+          <p id="other-warn" class="warn" hidden>Categories add up to more than the total. Check the numbers.</p>
+
+          <div id="ftc-row" class="row">
+            <label class="field"><span>First-time customers</span><input id="f-ftc" class="num" type="text" inputmode="numeric"></label>
+            <label class="field"><span>First-time spend ($)</span><input id="f-fts" class="num" type="text" inputmode="decimal"></label>
+          </div>
+
+          <label class="field"><span>Notes</span><input id="f-notes" type="text" maxlength="300"></label>
+
+          <div class="actions">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" id="btn-save-email" class="btn">Save &amp; email</button>
+            <button type="button" id="btn-new" class="btn btn-ghost">Clear</button>
+            <button type="button" id="btn-delete" class="btn btn-danger" hidden>Delete</button>
+          </div>
+          <p id="report-msg" class="msg" role="status"></p>
+        </form>
+
+        <aside class="card email-card">
+          <h2>Email preview</h2>
+          <dl class="email-meta">
+            <dt>To</dt><dd id="e-to"></dd>
+            <dt>CC</dt><dd id="e-cc"></dd>
+            <dt>Subject</dt><dd id="e-subject"></dd>
+          </dl>
+          <pre id="e-body" class="email-body"></pre>
+          <div class="actions">
+            <button type="button" id="btn-copy" class="btn">Copy text</button>
+            <button type="button" id="btn-mail" class="btn">Open in email</button>
+          </div>
+          <p id="sent-note" class="muted small"></p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Log -->
+    <section class="view" data-view="log" hidden>
+      <div class="view-head">
+        <h1>Report log</h1>
+        <div class="seg" id="log-channel">
+          <button data-channel="all">All</button>
+          <button data-channel="online">Online</button>
+          <button data-channel="trailer">Trailer</button>
+        </div>
+      </div>
+      <div class="card flush">
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>Dates</th><th>Channel</th><th class="num">Visits / orders</th><th class="num">Total</th><th>Status</th></tr></thead>
+            <tbody id="log-body"></tbody>
+          </table>
+        </div>
+      </div>
+      <p class="muted small">Tap a row to open it. Imported rows show where they came from (Excel or the nightly Shopify pull).</p>
+    </section>
+
+    <!-- Totals -->
+    <section class="view" data-view="totals" hidden>
+      <div class="view-head">
+        <h1>Totals</h1>
+        <div class="seg" id="totals-channel">
+          <button data-channel="online">Online</button>
+          <button data-channel="trailer">Trailer</button>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="chips">
+            <button type="button" class="chip" data-range="this-week">This week</button>
+            <button type="button" class="chip" data-range="last-week">Last week</button>
+            <button type="button" class="chip" data-range="this-month">This month</button>
+            <button type="button" class="chip" data-range="last-month">Last month</button>
+            <button type="button" class="chip" data-range="ytd">Year to date</button>
+          </div>
+          <div class="row">
+            <label class="field"><span>From</span><input id="t-from" type="date"></label>
+            <label class="field"><span>To</span><input id="t-to" type="date"></label>
+          </div>
+          <table class="table compact" id="t-table"></table>
+          <p id="t-note" class="muted small"></p>
+        </div>
+        <aside class="card email-card">
+          <h2>Summary email</h2>
+          <dl class="email-meta">
+            <dt>To</dt><dd id="te-to"></dd>
+            <dt>CC</dt><dd id="te-cc"></dd>
+            <dt>Subject</dt><dd id="te-subject"></dd>
+          </dl>
+          <pre id="te-body" class="email-body"></pre>
+          <div class="actions">
+            <button type="button" id="t-copy" class="btn">Copy text</button>
+            <button type="button" id="t-mail" class="btn">Open in email</button>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Events -->
+    <section class="view" data-view="events" hidden>
+      <div class="view-head"><h1>Events</h1></div>
+      <div class="grid-2">
+        <div>
+          <div id="events-list" class="stack"></div>
+        </div>
+        <form id="event-form" class="card" autocomplete="off">
+          <h2 id="event-form-title">Add event</h2>
+          <label class="field"><span>Name</span><input id="ev-name" type="text" required maxlength="120" placeholder="Sick Week 2027"></label>
+          <div class="row">
+            <label class="field"><span>Start</span><input id="ev-start" type="date" required></label>
+            <label class="field"><span>End</span><input id="ev-end" type="date" required></label>
+          </div>
+          <label class="field"><span>Notes</span><input id="ev-notes" type="text" maxlength="300"></label>
+          <div class="actions">
+            <button type="submit" class="btn btn-primary">Save event</button>
+            <button type="button" id="ev-cancel" class="btn btn-ghost" hidden>Cancel</button>
+            <button type="button" id="ev-delete" class="btn btn-danger" hidden>Delete</button>
+          </div>
+          <p id="event-msg" class="msg" role="status"></p>
+          <p class="muted small">Event totals add up every report that ends inside the event dates, so nothing needs archiving by hand.</p>
+        </form>
+      </div>
+    </section>
+
+    <!-- Settings -->
+    <section class="view" data-view="settings" hidden>
+      <div class="view-head"><h1>Settings</h1></div>
+      <div class="grid-2">
+        <form id="settings-form" class="card" autocomplete="off">
+          <div class="seg" id="settings-channel">
+            <button type="button" data-channel="online">Online</button>
+            <button type="button" data-channel="trailer">Trailer</button>
+          </div>
+          <label class="field"><span>To</span><input id="s-to" type="text"></label>
+          <label class="field"><span>CC</span><input id="s-cc" type="text"></label>
+          <label class="field"><span>Subject starts with</span><input id="s-subject" type="text"></label>
+          <label class="field"><span>Label for visits / orders</span><input id="s-visits" type="text"></label>
+          <div class="field">
+            <span>Categories (in email order; Other and Total are automatic)</span>
+            <div id="s-cats" class="stack-sm"></div>
+            <button type="button" id="s-add-cat" class="btn btn-ghost btn-sm">+ Add category</button>
+          </div>
+          <div class="actions">
+            <button type="submit" class="btn btn-primary">Save settings</button>
+          </div>
+          <p id="settings-msg" class="msg" role="status"></p>
+        </form>
+
+        <div class="stack">
+          <form id="pin-form" class="card" autocomplete="off">
+            <h2>Change PIN</h2>
+            <label class="field"><span>New PIN (4+ characters)</span><input id="pin-new" type="password" inputmode="numeric" autocomplete="new-password" required minlength="4"></label>
+            <label class="field"><span>Repeat new PIN</span><input id="pin-new2" type="password" inputmode="numeric" autocomplete="new-password" required minlength="4"></label>
+            <div class="actions"><button type="submit" class="btn">Change PIN</button></div>
+            <p id="pin-msg" class="msg" role="status"></p>
+          </form>
+          <div class="card">
+            <h2>This device</h2>
+            <p class="muted small">Signing out forgets the PIN on this device.</p>
+            <button type="button" id="btn-logout" class="btn btn-ghost">Sign out</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
