@@ -29,7 +29,8 @@ Shopify (online) and merch trailer (POS) sales emails.
 ## History
 
 `scripts/import_workbook.py` produced the one-time import of the spreadsheet: 61 online reports
-(Jan 26 – Apr 20, 2026), 8 trailer reports, and the Sick Week 2026 event. Online reports from Aug 14, 2026
+(Jan 26 – Apr 20, 2026), 8 trailer reports, and the Sick Week 2026 event. Trailer reports from May 28 – Sep 27, 2026
+were added later from a newer copy of the sheet (19 trailer reports in total). Online reports from Aug 14, 2026
 onward were backfilled from the nightly Shopify pulls (source `shopify` in the Log). Apr 21 – Aug 13 has
 no data yet; add those days on the Report tab (Pull from Shopify won't have them) if you need them for totals.
 
