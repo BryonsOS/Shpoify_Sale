@@ -115,7 +115,10 @@
     var p = pctChange(cur, prev);
     if (p == null) return null;
     var r = Math.round(p * 100);
-    return el("span", { class: "delta " + (r > 0 ? "up" : r < 0 ? "down" : "flat") }, [deltaText(cur, prev) + (suffix ? " " + suffix : "")]);
+    return el("span", { class: "delta-wrap" }, [
+      el("span", { class: "delta " + (r > 0 ? "up" : r < 0 ? "down" : "flat"), text: deltaText(cur, prev) }),
+      suffix ? el("span", { class: "delta-vs", text: suffix }) : null,
+    ]);
   }
 
   function toast(text) {
@@ -446,9 +449,6 @@
     $("today-greeting").textContent = h < 12 ? "Good morning" : h < 17 ? "Good afternoon" : "Good evening";
     renderMorningCard();
     renderTodayEvent();
-    var cur = currentEvent(), evBox = $("today-event"), repBox = $("today-report");
-    if (cur && cur.mode === "live") evBox.parentNode.insertBefore(evBox, repBox);
-    else repBox.parentNode.insertBefore(repBox, evBox);
     renderUnsent();
     renderTodayTiles();
     var weeks = [], ws = weekStart(t);
@@ -456,12 +456,15 @@
       var from = addDays(ws, -7 * i), to = addDays(from, 6), a = aggregate("online", from, to);
       weeks.push({ label: i === 0 ? "This wk" : md(from), title: i === 0 ? "This week so far (" + md(from) + " – " + md(to) + ")" : "Week of " + md(from), value: a.total, partial: i === 0 });
     }
+    var done = weeks.slice(0, -1), sum12 = done.reduce(function (a, w) { return a + w.value; }, 0);
+    var best = done.reduce(function (b, w) { return w.value > b.value ? w : b; }, done[0]);
+    $("today-chart-sub").textContent = sum12 ? "Last 12 weeks · best " + fmtMoney0(best.value) + " (" + best.title.replace("Week of ", "week of ") + ")" : "Last 12 weeks";
     columnChart($("today-chart"), {
+      height: 240,
       labels: weeks.map(function (w) { return w.label; }),
       titles: weeks.map(function (w) { return w.title; }),
       series: [{ name: "Online sales", color: "var(--s1)", values: weeks.map(function (w) { return w.value; }) }],
       faded: weeks.map(function (w) { return w.partial; }),
-      height: 200,
     });
   }
   function renderMorningCard() {

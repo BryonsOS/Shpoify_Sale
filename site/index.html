@@ -37,6 +37,7 @@
   <!-- App -->
   <div id="app" hidden>
     <header class="topbar">
+     <div class="topbar-inner">
       <a class="brand" href="#" data-go="today" aria-label="Sick Sales home">
         <img class="brand-logo" src="https://cdn.shopify.com/s/files/1/0640/8981/7310/files/STM_Logo_Sick_The_Mag_Square_Color_RGB_72dpi_v01.png?v=1784655999" alt="">
         <span>Sales</span>
@@ -52,6 +53,7 @@
       <button class="icon-btn only-mobile" data-tab="settings" aria-label="Settings">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></svg>
       </button>
+     </div>
     </header>
 
     <!-- Today -->
@@ -62,22 +64,22 @@
           <h1 id="today-greeting">Good morning</h1>
         </div>
       </div>
-      <div class="today-grid">
-        <div class="stack">
+      <div class="stack">
+        <div id="today-event"></div>
+        <div id="today-tiles" class="tiles"></div>
+        <div class="today-main">
           <div id="today-report" class="card hero-card"></div>
-          <div id="today-event"></div>
-          <div id="today-unsent"></div>
-        </div>
-        <div class="stack">
-          <div id="today-tiles" class="tiles"></div>
-          <div class="card">
+          <div class="card chart-card">
             <div class="card-head">
-              <h2>Online sales by week</h2>
-              <span class="muted small">Last 12 weeks</span>
+              <div>
+                <h2>Online sales by week</h2>
+                <p id="today-chart-sub" class="muted small chart-sub"></p>
+              </div>
             </div>
             <div id="today-chart" class="chart"></div>
           </div>
         </div>
+        <div id="today-unsent"></div>
       </div>
     </section>
 
