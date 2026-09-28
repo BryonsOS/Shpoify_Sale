@@ -24,7 +24,11 @@ Shopify (online) and merch trailer (POS) sales emails.
 - **Pull from Shopify** reads `dash_shopify_daily`, which the `bryon-dashboard-nightly` job fills each
   morning using the same rules as the `sick-daily-merch-report` skill (EDT cutoff, POS excluded, Monday = Fri–Sun).
   An exact date match is used first; otherwise single-day pulls are added up if every day is there.
-- The schema is in `supabase/migrations/20260928_sales_app.sql`.
+- **Online reports create themselves.** A trigger on `dash_shopify_daily` turns each weekday nightly pull
+  (Monday = Fri–Sun, Tue–Fri = the day before) into an online report, so each morning you just open the
+  Report tab, check the numbers and hit Save & email. A report you've edited by hand or already emailed is
+  never overwritten. Trailer (POS) reports are still entered by hand, since the trailer only runs at events.
+- The schema is in `supabase/migrations/`.
 
 ## History
 

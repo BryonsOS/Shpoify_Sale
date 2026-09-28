@@ -337,7 +337,7 @@
     $("btn-delete").hidden = !r;
     $("report-title").textContent = r ? "Edit report" : "New report";
     if (r) {
-      var src = r.source === "excel" ? " Imported from the old spreadsheet." : r.source === "shopify" ? " Filled from the nightly Shopify pull." : "";
+      var src = r.source === "excel" ? " Imported from the old spreadsheet." : r.source === "shopify" ? " Filled in automatically from last night's Shopify pull; check it, then email it." : r.source === "shopify-edited" ? " Started from the nightly Shopify pull, then edited." : "";
       b.textContent = "A report for these dates is already saved. Changes will update it." + src;
       b.className = "banner info";
       b.hidden = false;
@@ -418,7 +418,9 @@
       visits: d.visits, total: d.total, categories: d.categories,
       first_time_customers: d.channel === "online" ? d.ftc : null,
       first_time_spend: d.channel === "online" ? d.fts : null,
-      notes: d.notes, source: state.report.source,
+      notes: d.notes,
+      // Saving an auto-created report by hand marks it edited, so the nightly pull won't overwrite it.
+      source: state.report.id && state.report.source === "shopify" ? "shopify-edited" : state.report.source,
     };
     msg("report-msg", "Saving…");
     // Open the mail window now, inside the click, so pop-up blockers allow it.
